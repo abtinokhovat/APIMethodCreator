@@ -23,15 +23,23 @@ namespace APIMethodCreator
             da.Fill(dt);
             for (int i = 0; i < dt.Rows.Count; i++)
             {
-                string modelName = dt.Rows[i].ItemArray[2].ToString();
-                string fileName = @"C:\Users\Paliz Co\Desktop\New Folder\" + modelName + ".txt";
+                string modelName = dt.Rows[i].ItemArray[1].ToString();
+                string fileName = @"C:\Users\Paliz Co\Desktop\New Folder\" + modelName + ".cs";
                 // Create a new file     
                 using (FileStream fs = File.Create(fileName))
                 {
                     // Add some text to file    
-                    Byte[] title = new UTF8Encoding(true).GetBytes(dt.Rows[i].ItemArray[3].ToString());
+                    Byte[] title = new UTF8Encoding(true).GetBytes(dt.Rows[i].ItemArray[2].ToString());
                     fs.Write(title, 0, title.Length);
                 }
+
+                string methodFile = @"C:\Users\Paliz Co\Desktop\New Folder\method.cs";
+                // Create Method File
+                File.AppendAllLines(methodFile, new string[] {
+
+                    dt.Rows[i].ItemArray[3].ToString()
+                });
+
 
             }
         }
